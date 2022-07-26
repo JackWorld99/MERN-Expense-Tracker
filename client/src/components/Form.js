@@ -4,14 +4,14 @@ import List from './List'
 import {default as api} from '../store/apiSlice'
 
 export default function Form() {
-    const {register, handleSubmit, resetFields} = useForm();
+    const {register, handleSubmit, resetField} = useForm();
     const [addTransaction] = api.useAddTransactionMutation();
 
     const onSubmit = async(data) => {
         if(!data) return {};
         await addTransaction(data).unwrap();
-        resetFields('name');
-        resetFields('amount');
+        resetField('name');
+        resetField('amount');
     }
 
   return (

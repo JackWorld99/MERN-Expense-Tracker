@@ -14,7 +14,7 @@ export const apiSlice = createApi({
             query: () => '/labels',
             providesTags: ['transactions']
         }),
-        addTranstion: builder.mutation({
+        addTransaction: builder.mutation({
            query: (initialTransaction) => ({
             url: '/transactions',
             method: 'POST',

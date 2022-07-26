@@ -7,8 +7,9 @@ const initialState = {
 
 export const expenseSlice = createSlice({
     name: 'expense',
-    initialState: {
-        getTranscations: (state) => {}
+    initialState,
+    reducers : {
+        getTransactions: (state) => {}
     }
 })
 
