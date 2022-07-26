@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
-  --color-yellow: #f9c74f;
+  --color-yollow: #f9c74f;
   --color-purple: #9d4edd;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .bg-yellow {
-  background-color: var(--color-yellow);
+  background-color: var(--color-yollow);
 }
 
 .bg-purple {
@@ -37,6 +37,7 @@
   margin-right: auto;
 }
 
+
 .form-input {
-  @apply mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md focus: outline-none focus:ring-indigo-500 sm:text-sm;
+  @apply mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md focus:outline-none focus:ring-indigo-500 sm:text-sm;
 }
