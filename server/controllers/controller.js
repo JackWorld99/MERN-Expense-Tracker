@@ -1,16 +1,19 @@
 const model = require('../models/model');
 
 exports.createCategories = async (req, res) => {
-    const create = new model.categoriesModel([
-        {type: "Expense", color: "#C43095"},
-        {type: "Investment", color: "#FCBE44"},
-        {type: "Saving", color: "#1F3B5C"},
-    ]);
-
-    await create.save(error => {
-        if(!error) return res.json(create);
-        return res.status(400).json({message: `Error while creating categories ${error}`});
-    })
+    try {
+        const docs = [
+            {type: "Expense", color: "#fa4632"},
+            {type: "Investment", color: "#fcbe44"},
+            {type: "Savings", color: "#04b521"},
+            {type: "Insurance", color: "#4997f2"},
+            {type: "Charity", color: "#f74dc1"},
+        ];
+        const Create = await model.categoriesModel.create(docs);
+        return res.json(Create);
+    }catch(error) {
+        res.status(400).json({message: `Error while creating categories ${error}`});
+    }
 }
 
 exports.getCategories = async (req, res) => {
