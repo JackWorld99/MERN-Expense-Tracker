@@ -17,7 +17,7 @@
 
 .App {
   text-align: center;
-  padding: 4em 0;
+  background-color: #D9DBF1;
 }
 
 .bg-yellow {
@@ -26,6 +26,10 @@
 
 .bg-purple {
   background-color: var(--color-purple);
+}
+
+.bg-banner {
+  background-color: #4C5760;
 }
 
 .chart .title {

@@ -16,22 +16,24 @@ export default function Form() {
 
   return (
     <div className="form max-w-sm mx-auto w-96">
-        <h1 className='font-bold pb-4 text-xl'>Transaction</h1>
+        <h1 className='font-bold pb-4 text-xl'>Transaction Record</h1>
         <form id='form' onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4">
                 <div className="input-group">
-                    <input type="text" {...register('name')} placeholder='Salary, House Rent, SIP' className='form-input' />
+                    <input type="text" {...register('name')} placeholder='Salary, House Rent...' className='form-input' required/>
                 </div>
                 <select className='form-input' {...register('type')}>
-                    <option value="Investment" defaultValue>Investment</option>
-                    <option value="Expense">Expense</option>
+                    <option value="Expense" defaultValue>Expense</option>
                     <option value="Savings">Savings</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Insurance">Insurance</option>
+                    <option value="Charity">Charity</option>
                 </select>
                 <div className="input-group">
-                    <input type="text" {...register('amount')} placeholder='Amount' className='form-input' />
+                    <input type="number" {...register('amount')} placeholder='Amount' className='form-input' required/>
                 </div>
                 <div className="submit-btn">
-                    <button className='border py-2 text-white bg-indigo-500 w-full'>Make Transaction</button>
+                    <button className='py-2 text-white bg-indigo-500 w-full rounded'>Record</button>
                 </div>
             </div>    
         </form>
