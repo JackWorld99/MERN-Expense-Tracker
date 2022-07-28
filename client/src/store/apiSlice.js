@@ -14,11 +14,19 @@ export const apiSlice = createApi({
             query: () => '/labels',
             providesTags: ['transactions']
         }),
+        getLists: builder.mutation({
+            query: (retrieveList) => ({
+                url: '/sortList',
+                method: 'POST',
+                body: retrieveList
+            }),
+            invalidatesTags: ['sortList']
+        }),
         addTransaction: builder.mutation({
            query: (initialTransaction) => ({
-            url: '/transactions',
-            method: 'POST',
-            body: initialTransaction
+                url: '/transactions',
+                method: 'POST',
+                body: initialTransaction
            }),
            invalidatesTags: ['transactions']
         }),

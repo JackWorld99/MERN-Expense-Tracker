@@ -1,4 +1,5 @@
 const model = require('../models/model');
+const moment = require('moment')
 
 exports.createCategories = async (req, res) => {
     try {
@@ -70,4 +71,68 @@ exports.getLabels = async (req, res) => {
     }).catch(error => {
         res.status(400).json("Lookup Collection Error")
     })
+}
+
+exports.getList = async (req, res) => {
+    const resultBody = req.body;
+    var weekOrMonth;
+    var isClick = false;
+
+    if(resultBody.data == "week"){
+        isClick = true;
+        weekOrMonth = moment().subtract(7,'d').toDate();
+    }
+
+    if(resultBody.data == "month"){
+        isClick = true;
+        weekOrMonth = moment().subtract(1,'M').format();
+    }
+
+    if(isClick){
+        model.transactionModel.aggregate([
+            {
+                $lookup: {
+                    from: "categories",
+                    localField: "type",
+                    foreignField: "type",
+                    as: "categories_info"
+                }
+            },
+            {$unwind: "$categories_info"},
+            {$match: {
+                date: { 
+                    $gt: weekOrMonth,
+                    $lte: moment().toDate()
+                },
+            }}
+        ]).then(result => {
+            let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color'], date: value.date}));
+            res.json(data);
+        }).catch(error => {
+            res.status(400).json("Lookup Collection Error")
+        });
+    }else{
+        model.transactionModel.aggregate([
+            {
+                $lookup: {
+                    from: "categories",
+                    localField: "type",
+                    foreignField: "type",
+                    as: "categories_info"
+                }
+            },
+            {$unwind: "$categories_info"},
+            {$match: {
+                date: { 
+                    $gt: moment().subtract(7,'d').toDate(),
+                    $lte: moment().toDate()
+                },
+            }}
+        ]).then(result => {
+            let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color'], date: value.date}));
+            res.json(data);
+        }).catch(error => {
+            res.status(400).json("Lookup Collection Error")
+        });
+    }
 }
