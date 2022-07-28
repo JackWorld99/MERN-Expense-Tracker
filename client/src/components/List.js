@@ -1,5 +1,6 @@
 import React from 'react'
 import 'boxicons'
+import DateList from './dateList'
 import {default as api} from '../store/apiSlice'
 
 export default function List() {
@@ -24,6 +25,7 @@ export default function List() {
   return (
     <div className="flex flex-col py-6 gap-3">
         {history}
+        <DateList></DateList>
         {Transactions}
     </div>
   )
