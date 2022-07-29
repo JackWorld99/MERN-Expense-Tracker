@@ -12,6 +12,7 @@ export default function Form() {
         await addTransaction(data).unwrap();
         resetField('name');
         resetField('amount');
+        window.location.reload();
     }
 
   return (
