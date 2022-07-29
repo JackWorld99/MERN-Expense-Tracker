@@ -75,8 +75,7 @@ exports.getLabels = async (req, res) => {
 
 exports.getList = async (req, res) => {
     const resultBody = req.body;
-    var weekOrMonth;
-    var isClick = false;
+    let weekOrMonth, isClick = false;
 
     if(resultBody.data == "week"){
         isClick = true;
@@ -85,7 +84,7 @@ exports.getList = async (req, res) => {
 
     if(resultBody.data == "month"){
         isClick = true;
-        weekOrMonth = moment().subtract(1,'M').format();
+        weekOrMonth = moment().subtract(1,'M').toDate();
     }
 
     if(isClick){
@@ -107,7 +106,7 @@ exports.getList = async (req, res) => {
             }}
         ]).then(result => {
             let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color'], date: value.date}));
-            res.json(data);
+            return res.json(data);
         }).catch(error => {
             res.status(400).json("Lookup Collection Error")
         });
@@ -121,16 +120,10 @@ exports.getList = async (req, res) => {
                     as: "categories_info"
                 }
             },
-            {$unwind: "$categories_info"},
-            {$match: {
-                date: { 
-                    $gt: moment().subtract(7,'d').toDate(),
-                    $lte: moment().toDate()
-                },
-            }}
+            {$unwind: "$categories_info"}
         ]).then(result => {
             let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color'], date: value.date}));
-            res.json(data);
+            return res.json(data);
         }).catch(error => {
             res.status(400).json("Lookup Collection Error")
         });
