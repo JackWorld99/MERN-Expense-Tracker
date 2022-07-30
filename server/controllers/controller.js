@@ -62,9 +62,8 @@ exports.getLabels = async (req, res) => {
                 as: "categories_info"
             }
         },
-        {
-            $unwind: "$categories_info"
-        }
+        { $sort : { date : -1 }},
+        { $unwind: "$categories_info" }
     ]).then(result => {
         let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color']}));
         res.json(data);
@@ -103,7 +102,8 @@ exports.getList = async (req, res) => {
                     $gt: weekOrMonth,
                     $lte: moment().toDate()
                 },
-            }}
+            }},
+            { $sort : { date : -1 }}
         ]).then(result => {
             let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color'], date: value.date}));
             return res.json(data);
@@ -120,7 +120,8 @@ exports.getList = async (req, res) => {
                     as: "categories_info"
                 }
             },
-            {$unwind: "$categories_info"}
+            {$unwind: "$categories_info"},
+            { $sort : { date : -1 }}
         ]).then(result => {
             let data = result.map(value => Object.assign({}, {_id: value._id, name: value.name, type: value.type, amount: value.amount, color: value.categories_info['color'], date: value.date}));
             return res.json(data);
