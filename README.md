@@ -1,11 +1,9 @@
 <p align="center">
-<img src="client/public/mern.png" alt="Logo" width="40%" height="30%" justify-items="center"/>
+<img src="./client/public/mern.png" alt="Logo" width="40%" height="30%" justify-items="center"/>
 <h3 align="center">🎉 MERN Stack Expense Tracker 🪙✍️</h3>
 </p>
 
 ---
-
-<!-- # MERN Stack Expense Tracker -->
 
 ### 🔎 What is in MERN stack? ✨
 MERN stack is a web development framework. It consists of MongoDB, ExpressJS, ReactJS, and NodeJS as its working components.
@@ -17,7 +15,7 @@ This expense tracker app allows you to monitor and categorize different expenses
 
 ### 📢 Features Demo 
 
-![](client/public/demo.gif)
+![](./client/public/demo.gif)
 
 ---
 
